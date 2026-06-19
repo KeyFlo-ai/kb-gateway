@@ -1,0 +1,33 @@
+{
+  "project": "KeyFlo-ai/kb-gateway",
+  "period_days": 2,
+  "generated": "2026-06-19",
+  "summary": "Shipped HTTP MCP gateway + full observability stack in one push — kb-mcp.keyflo.ai live, Cole handoff, W9–W15 closed.",
+  "commits": 12,
+  "highlights": [
+    "3d8f902 — FastMCP gateway (5 tools, agentic router)",
+    "92e4419 — public MCP kb-mcp.keyflo.ai + nginx/Cloudflare",
+    "f4fd897 — observability: audit log, metadata, usage report, eval scripts"
+  ],
+  "patterns_captured": [
+    "langchain-course/patterns/proven/mcp-gateway-observability-stack.md"
+  ],
+  "gates_passed": [
+    "smoke_test.sh PASS",
+    "eval_routes.sh 12/12",
+    "audit.jsonl client=cole",
+    "LangSmith surface=mcp traces",
+    "sanity-query pattern retrievable"
+  ],
+  "deferred": [
+    "WAF/rate limit (D-P2)",
+    "RAGAS batch (12 queries + smoke only)",
+    "LangSmith project split (D-004)",
+    "Cole live HTTPS test from his machine"
+  ],
+  "lessons": [
+    "instrument_tool must be decorator factory — crash-loop if two-arg signature",
+    "token_client_map must skip bare # comment lines in keys file",
+    "Online eval OR-filter preserves prod chain scoring when adding MCP surface"
+  ]
+}
