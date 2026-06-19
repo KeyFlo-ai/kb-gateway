@@ -4,7 +4,7 @@
 
 ## Identity
 
-HTTP MCP gateway exposing the **learning KB** (Pinecone + Neo4j + agentic router) to remote agents. GitHub: `okrealai/kb-gateway`.
+HTTP MCP gateway exposing the **learning KB** (Pinecone + Neo4j + agentic router) to remote agents. GitHub: `KeyFlo-ai/kb-gateway`.
 
 ## Gated execution routine
 
