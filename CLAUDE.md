@@ -10,7 +10,8 @@ HTTP MCP gateway exposing the **learning KB** (Pinecone + Neo4j + agentic router
 
 - **Routine:** gated-execution-routine v1.2 → `/root/.claude/references/gated-execution-routine.md`
 - **Run dir:** `/mnt/blockstorage/business/Keyflo_AI/09_Projects/kb-gateway/run/`
-- **Resume:** read `run/STATE.md` → `run/CONTINUE.md`
+- **Resume:** `run/STATE.md` → `run/04-HARDENING-PLAN.md` → `run/CONTINUE.md`
+- **Phase:** 4–5 shipped · CAPTURE done · **Phase 6 W16–W22 NEXT** (hardening & automation)
 
 ## Parent context
 
