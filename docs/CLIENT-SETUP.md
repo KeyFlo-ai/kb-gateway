@@ -54,6 +54,8 @@ James issues bearer tokens (one per user) in `learning-kb-api-keys.txt` on the s
 
 For self-serve setup via GitHub variables, you need **read access** to the repo so `./scripts/setup-mcp.sh` can pull `KB_GATEWAY_MCP_URL` and your personal `KB_GATEWAY_MCP_TOKEN`.
 
+**Friends (token from James, not GitHub variables):** see [`FRIEND-SETUP.md`](FRIEND-SETUP.md).
+
 ---
 
 ## Alternative: HTTP query API (no MCP)
