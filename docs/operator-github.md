@@ -1,28 +1,22 @@
-# Operator: publish to KeyFlo-ai GitHub
+# GitHub — okrealai/kb-gateway
 
-The agent token (`GITHUB_AGENT_TOKEN`) cannot `CreateRepository` in KeyFlo-ai. A human with org admin must create the repo once, then push.
+**Live:** https://github.com/okrealai/kb-gateway
 
-## One-time (James or Cole with org admin)
+Published under the **okrealai** account (James). Cole can be added as collaborator.
 
-1. Create empty repo: **https://github.com/organizations/KeyFlo-ai/repositories/new**
-   - Name: `kb-gateway`
-   - Public
-   - Do not add README (local repo has history)
-
-2. Push from server:
+## Push updates
 
 ```bash
 cd /mnt/blockstorage/business/Keyflo_AI/08_Development/kb-gateway
-git remote add origin git@github.com:KeyFlo-ai/kb-gateway.git 2>/dev/null || \
-  git remote set-url origin git@github.com:KeyFlo-ai/kb-gateway.git
-git push -u origin main
+unset GH_TOKEN GITHUB_TOKEN   # use okrealai gh auth, not agent-smithj
+git push origin main
 ```
 
-3. Add Cole as collaborator (read or maintain).
+## Optional: mirror to KeyFlo-ai org
 
-4. Issue Cole a **KB_GATEWAY_API_TOKEN** (not Pinecone/Neo4j keys). Token lives in `/mnt/blockstorage/env/kb-gateway.env` on the server — share via 1Password or Tailscale-only channel.
+If you later want it under the KeyFlo org, create `KeyFlo-ai/kb-gateway` and add as second remote:
 
-## Verify
-
-- README + AGENTS.md visible on GitHub
-- `docs/client-setup.md` linked for Cole's Cursor MCP config
+```bash
+git remote add keyflo git@github.com:KeyFlo-ai/kb-gateway.git
+git push keyflo main
+```

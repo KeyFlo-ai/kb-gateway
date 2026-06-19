@@ -30,7 +30,7 @@ OPENAI_API_KEY=
 
 ## GitHub
 
-- Org: `KeyFlo-ai`
+- Repo: `okrealai/kb-gateway` (https://github.com/okrealai/kb-gateway)
 - Repo: `kb-gateway`
 
 ## Related services
