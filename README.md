@@ -4,6 +4,7 @@ HTTP MCP gateway for the **learning corpus** — Pinecone + Neo4j + agentic rout
 
 | Audience | Start here |
 |---|---|
+| **Cole / collaborators** | [`docs/COLE-SETUP.md`](docs/COLE-SETUP.md) |
 | **LLMs / agents** | [`AGENTS.md`](AGENTS.md) |
 | **Humans** | This README |
 | **Discovery** | [`llms.txt`](llms.txt) |
