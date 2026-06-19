@@ -44,12 +44,12 @@ Never give remote agents Pinecone or Neo4j credentials — they use MCP tools on
 
 | Method | When | Notes |
 |---|---|---|
-| **Tailscale (direct)** | **Works now** — Cole on same tailnet | Gateway binds `100.122.28.113:8790` on James's server. Bearer token required. Not VETRIQ — shared infra hostname is legacy only. |
-| **Tailscale Serve** | Optional HTTPS | Enable at [tailscale serve admin](https://login.tailscale.com/f/serve?node=nfdH3hCrJi11CNTRL); then `sudo tailscale serve --bg http://127.0.0.1:8790` and revert bind to 127.0.0.1 |
+| **jamess-mac-mini (Tailscale Serve)** | **Recommended** for Cole + Mac | Mac proxies server gateway: `tailscale serve --bg http://100.122.28.113:8790`. Clients use `http://jamess-mac-mini:8790/mcp`. See [`mac-mini-proxy.md`](mac-mini-proxy.md). |
+| **SSH stdio from Mac** | Works without HTTP | Cursor on jamess-mac-mini SSHs to server — see [`client-setup.md`](client-setup.md). |
 | **Cloudflare Tunnel** | Public HTTPS with Access policy | Zero trust; no open ports |
 | **SSH tunnel** | Dev / emergency | `ssh -L 8790:127.0.0.1:8790 server` |
 
-Do **not** orange-cloud Neo4j bolt or bind gateway to 0.0.0.0 without auth + TLS.
+Gateway binds **127.0.0.1:8790** on the blockstorage server only — not exposed on the server's Tailscale IP.
 
 ## 4. Auth
 

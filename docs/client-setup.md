@@ -1,14 +1,16 @@
 # Client setup — wire remote agents to kb-gateway
 
-## Remote via Tailscale (no Serve required)
+## Remote via jamess-mac-mini (recommended)
 
-If Cole is on your **smithjsfamily@** tailnet, use the server's Tailscale IP:
+kb-gateway runs on the blockstorage server. **jamess-mac-mini** proxies it on the tailnet.
+
+**Prerequisite:** one-time Tailscale Serve on the Mac — see [`mac-mini-proxy.md`](mac-mini-proxy.md).
 
 ```json
 {
   "mcpServers": {
     "keyflo-learning-kb": {
-      "url": "http://100.122.28.113:8790/mcp",
+      "url": "http://jamess-mac-mini:8790/mcp",
       "headers": {
         "Authorization": "Bearer YOUR_KB_GATEWAY_API_TOKEN"
       }
@@ -17,51 +19,13 @@ If Cole is on your **smithjsfamily@** tailnet, use the server's Tailscale IP:
 }
 ```
 
-Or MagicDNS: `http://vetriq-server:8790/mcp` (when on tailnet).
+Or use the HTTPS URL from `tailscale serve status` on the Mac.
 
-Traffic stays inside the tailnet (WireGuard) — no public internet exposure.
+Traffic stays inside the tailnet. Keyflo learning KB only — not VETRIQ.
 
-## Cursor (remote / cloud agent) — Tailscale Serve (optional HTTPS)
+## Cursor on jamess-mac-mini (stdio via SSH)
 
-Add MCP server in Cursor settings (Streamable HTTP):
-
-**If Tailscale Serve is enabled** on the tailnet (see [`deployment.md`](deployment.md)), use the HTTPS URL Tailscale assigns to `vetriq-server`:
-
-```json
-{
-  "mcpServers": {
-    "keyflo-learning-kb": {
-      "url": "https://YOUR-TAILSCALE-OR-TUNNEL-HOST/mcp",
-      "headers": {
-        "Authorization": "Bearer YOUR_KB_GATEWAY_API_TOKEN"
-      }
-    }
-  }
-}
-```
-
-Read [`AGENTS.md`](../AGENTS.md) in repo — Cursor agents should load it for routing rules.
-
-## Cursor / Claude on the server (stdio)
-
-```json
-{
-  "mcpServers": {
-    "keyflo-learning-kb": {
-      "command": "/root/.venv-langchain-course/bin/python",
-      "args": ["-m", "kb_gateway", "--transport", "stdio", "--no-auth"],
-      "cwd": "/mnt/blockstorage/business/Keyflo_AI/08_Development/kb-gateway",
-      "env": {}
-    }
-  }
-}
-```
-
-Env loads from `bootstrap.load_env()` via langchain-course — no keys in config JSON.
-
-## Claude Desktop (Mac, via SSH)
-
-Desktop runs locally; MCP runs on server over SSH wrapper:
+No HTTP proxy needed — MCP runs on the server over SSH:
 
 ```json
 {
@@ -80,7 +44,26 @@ Desktop runs locally; MCP runs on server over SSH wrapper:
 }
 ```
 
-## Python (scripts)
+Replace `blockstorage-server` with your SSH host alias for the blockstorage box.
+
+## Cursor / Claude on the blockstorage server (stdio)
+
+```json
+{
+  "mcpServers": {
+    "keyflo-learning-kb": {
+      "command": "/root/.venv-langchain-course/bin/python",
+      "args": ["-m", "kb_gateway", "--transport", "stdio", "--no-auth"],
+      "cwd": "/mnt/blockstorage/business/Keyflo_AI/08_Development/kb-gateway",
+      "env": {}
+    }
+  }
+}
+```
+
+Env loads from `bootstrap.load_env()` via langchain-course — no keys in config JSON.
+
+## Python (scripts on server)
 
 ```python
 from kb_gateway.tools import route_query, query_namespace, graph_query
@@ -93,3 +76,5 @@ Requires server env + `LANGCHAIN_COURSE_REPO`.
 ## Which tool to call
 
 When unsure → **`route_query`**. See [`routing.md`](routing.md).
+
+Read [`AGENTS.md`](../AGENTS.md) in repo — agents should load it for routing rules.
