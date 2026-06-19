@@ -1,0 +1,6 @@
+# Uses langchain-course venv on server — install there if missing:
+# /root/.venv-langchain-course/bin/pip install mcp neo4j pydantic-settings
+
+mcp>=1.27
+neo4j>=5.0
+pydantic-settings>=2.0

@@ -1,0 +1,11 @@
+# kb-gateway — agent discovery
+
+- [AGENTS.md](AGENTS.md): LLM instructions — tool routing, env, when NOT to use
+- [README.md](README.md): Human overview
+- [docs/routing.md](docs/routing.md): Pinecone vs Neo4j vs router
+- [docs/deployment.md](docs/deployment.md): Host for remote access
+- [docs/client-setup.md](docs/client-setup.md): MCP client config
+- [RUNBOOK.md](RUNBOOK.md): Ops + failure modes
+- [09_Projects/kb-gateway/run/STATE.md](../09_Projects/kb-gateway/run/STATE.md): Gated project progress
+
+MCP tools: `route_query`, `query_namespace`, `graph_query`, `list_namespaces`, `health`
