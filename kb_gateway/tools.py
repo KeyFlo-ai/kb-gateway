@@ -20,6 +20,24 @@ def route_query(question: str, k: int = 6, max_retries: int = 2) -> dict[str, An
     return _rq(question, k=k, max_retries=max_retries)
 
 
+@instrument_tool("query_all")
+def query_all(question: str, k: int = 8) -> dict[str, Any]:
+    """Full-corpus RAG: course-transcripts + patterns + research-papers (whitepapers)
+    merged into one answer with namespace-tagged sources. Use for general research /
+    'what do we know about X' — it sees the WHOLE knowledge base, not one namespace."""
+    ensure_langchain_course()
+    from runtime.query import query_all as _qa
+
+    result = _qa(question, k=k)
+    return {
+        "answer": result.get("answer"),
+        "namespaces": result.get("namespaces"),
+        "per_namespace_counts": result.get("per_namespace_counts"),
+        "source_documents": result.get("source_documents"),
+        "structured_response": result.get("structured_response"),
+    }
+
+
 @instrument_tool("query_namespace")
 def query_namespace(
     question: str,
